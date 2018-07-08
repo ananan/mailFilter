@@ -32,13 +32,19 @@ class SplitEmail:
     #http://my.oschina.net/u/158589/blog/61037
     def words_2_trie(self, wordslist):
         d = {}
+        from time import sleep
         for word in wordslist:
             ref = d
             chars = self.regex.findall(word)
             for char in chars:
+                print char
                 ref[char] = ref.has_key(char) and ref[char] or {}
+                print '=====ref[char]=====',ref[char]
                 ref = ref[char]
+                print '==========ref==========', ref
+                sleep(0.2)
 
+        print type(d)
         return d
 
     def search_in_trie(self, chars, trie, res):

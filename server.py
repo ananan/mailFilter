@@ -4,18 +4,22 @@ import analysisEmail
 import splitEmail
 
 if __name__ == '__main__':
-    #加载历史邮件资料库，即建立判断条件
+    # 实例化
     init = splitEmail.SplitEmail()
+
+    # 初始化分词字典库
     words = init.init_wordslist()
+    # 字典树
     trie = init.words_2_trie(words)
+
     init.split(trie, ['./data/'])
     init.ratio = init.getRatio()
-    #for key in dic_of_ratio:
+    # for key in dic_of_ratio:
     #    print key, dic_of_ratio[key]
     ####################################################################
 
-    host = ''   		# Symbolic name meaning all available interfaces
-    port = 8888
+    host = 'localhost'  # Symbolic name meaning all available interfaces
+    port = 8899
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host, port))
     s.listen(5)
@@ -32,4 +36,3 @@ if __name__ == '__main__':
         conn.close()
         P = analysisEmail.JudgeMail().judge(init, trie, msg)
         print "P(spam) = ", P
-
